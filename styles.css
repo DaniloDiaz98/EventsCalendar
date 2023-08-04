@@ -6,6 +6,9 @@ body {
     background-image: linear-gradient(to bottom right, rgb(108, 173, 252), rgb(211, 211, 211));
     font-family: "lato", sans-serif;
 }
+#hd2 {
+    background: white ;
+}
 
 .registro {
     display: flex;
