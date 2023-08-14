@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Evento</title>
+    <!-- Agrega el enlace a los estilos de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Crear Nuevo Evento</h1>
+        <form method="post" action="procesar_evento.php" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="titulo">Título:</label>
+                <input type="text" class="form-control" name="titulo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input type="date" class="form-control" name="fecha" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lugar">Lugar:</label>
+                <input type="text" class="form-control" name="lugar" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea class="form-control" name="descripcion" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="imagen1">Imagen 1:</label>
+                <input type="file" class="form-control-file" name="imagen1" accept="image/*" required>
+            </div>
+
+            <div class="form-group">
+                <label for="imagen2">Imagen 2:</label>
+                <input type="file" class="form-control-file" name="imagen2" accept="image/*" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" name="crear_evento">Crear Evento</button>
+        </form>
+    </div>
+
+    <!-- Agrega los scripts de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

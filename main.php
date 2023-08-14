@@ -20,7 +20,7 @@ $email = $_SESSION['usuario']['email'];
 <head>
     <title>Perfil de Usuario</title>
 </head>
-<body id="hd2">
+<body >
     <h1>Bienvenido, <?php echo $nombre; ?>!</h1>
     <p>Tu dirección de correo electrónico es: <?php echo $email; ?></p>
     <!-- Puedes mostrar más información del usuario aquí -->
