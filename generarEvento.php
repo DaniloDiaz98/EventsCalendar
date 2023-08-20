@@ -82,15 +82,15 @@
     <div class="container">
         <h1 class="mt-5">Generar Evento</h1>
         <form action="procesarEvento.php" method="post" enctype="multipart/form-data" class="mt-4">
-            
+
             <?php
-            
-            if (isset($_GET["organizadorId"])) {  
-                $usuario = $_GET["usuario"];                    
+
+            if (isset($_GET["organizadorId"])) {
+                $usuario = $_GET["usuario"];
                 $organizadorId = $_GET["organizadorId"];
                 echo "<input type='hidden' name='id_organizador' value='$organizadorId'>";
                 echo "<input type='hidden' name='usuario' value='$usuario'>";
-                
+
             }
             ?>
             <div class="mb-3">
@@ -102,8 +102,27 @@
                 <input type="date" id="fecha" name="fecha" class="form-control" required>
             </div>
             <div class="mb-3">
+                <label for="ciudad" class="form-label">Ciudad:</label>
+                <select id="ciudad" name="ciudad" class="form-select" required>
+                    <option value="Latacunga">  </option>
+                    <option value="Quito">Quito</option>
+                    <option value="Ambato">Ambato</option>
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="lugar" class="form-label">Lugar:</label>
                 <input type="text" id="lugar" name="lugar" class="form-control" required>
+            </div>    
+            <div class="mb-3">
+                <label for="categoria" class="form-label">Categoría:</label>
+                <select id="categoria" name="categoria" class="form-select" required>
+                    <option value="musica">Música</option>
+                    <option value="danza">Danza</option>
+                    <option value="emprendimiento">Emprendimiento</option>
+                    <option value="teatro">Teatro</option>
+                    <option value="educacion">Educación</option>
+                    <option value="deporte">Deporte</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción:</label>
@@ -120,7 +139,7 @@
 
             <button type="submit" class="btn btn-primary">Guardar Evento</button>
             <a href="mainOrg.php?usuario=<?php echo urlencode($usuario); ?>">Volver al Dashboard</a>
-            
+
         </form>
     </div>
     <!-- Agrega aquí tus scripts adicionales si los necesitas -->

@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php'; // Asegúrate de haber instalado las dependencias con Composer
+require 'vendor/autoload.php'; 
 
 $dbhost = "localhost";
 $dbuser = "root";
@@ -19,6 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $titulo = $_POST["titulo"];
     $fecha = $_POST["fecha"];
     $lugar = $_POST["lugar"];
+    $ciudad = $_POST["ciudad"];
+    $categoria = $_POST["categoria"];
     $descripcion = $_POST["descripcion"];
     $idOrganizador = $_POST["id_organizador"];
 
@@ -55,8 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Insertar la información del evento y las URLs de las imágenes en la base de datos
         $status = 1; // Nuevo campo "status" con valor 1
-        $insertQuery = "INSERT INTO eventos (titulo, fecha, lugar, descripcion, imagen1, imagen2, status,id_org)
-                        VALUES ('$titulo', '$fecha', '$lugar', '$descripcion', '$urlImagen1', '$urlImagen2', '$status','$idOrganizador')";
+        $insertQuery = "INSERT INTO eventos (titulo, fecha, lugar, descripcion, imagen1, imagen2, status,id_org,ciudad,categoria)
+                        VALUES ('$titulo', '$fecha', '$lugar', '$descripcion', '$urlImagen1', '$urlImagen2', '$status','$idOrganizador', '$ciudad', '$categoria')";
 
         if (mysqli_query($conn, $insertQuery)) {
             header("Location: mainOrg.php?usuario=" . urlencode($usuario));
