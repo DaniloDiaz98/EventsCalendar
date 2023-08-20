@@ -5,36 +5,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Login</title>
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+   
 </head>
 
 <body>
-    <div class="registro">
-        <form action="validar.php" method="POST" class="form" id="form">
-            <h1 class="title">Login</h1>           
-            <!-- Usuario -->
-            <div class="inputContainer">
-                <input type="text" class="input" placeholder="a" name="usuario" required pattern="[A-Za-z]{3,50}"
-                    title="Solo letras. Tamaño mínimo: 3. Tamaño máximo: 50">
-                <label class="label">Usuario</label>
-            </div> 
-            <div id="salida" name="salida"></div>
-            <br>
-            <!-- Password -->
-            <div class="inputContainer">
-                <input type="password" class="input" placeholder="a" name="pass" required pattern="[0-9]{4}"
-                    title="Entre 1-4 digitos ">
-                <label class="label">Password</label>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto registro">
+                <form action="validar.php" method="POST" class="form" id="form">
+                    <h1 class="title">Bienvenido</h1>
+                    <!-- Usuario -->
+                    <div class="inputContainer">
+                        <input type="text" class="input" placeholder=" " name="usuario" required
+                            pattern="[A-Za-z]{3,50}" title="Solo letras. Tamaño mínimo: 3. Tamaño máximo: 50">
+                        <label class="label">Usuario</label>
+                    </div>
+                    <div id="salida" name="salida"></div>
+                    <!-- Password -->
+                    <div class="inputContainer">
+                        <input type="password" class="input" placeholder=" " name="pass" required pattern="[0-9]{4}"
+                            title="Entre 1-4 digitos ">
+                        <label class="label">Password</label>
+                    </div>
+                    <!-- Botones -->
+                    <div>
+                        <button type="submit" class="btn" name="Ingresar" id="btnr">Ingresar</button>
+                        <a href="regis.html" class="btn btn-secondary">Registrarse</a>
+                        <a href="dash.php" type="reset" class="btn btn-secondary">Regresar</a>
+                        <a href="recovery.php">Olvidaste el password?</a>
+                    </div>
+                </form>
             </div>
-            
-            <!-- Botones -->
-            <div>
-                <button type="submit" class="btn" name="Ingresar" id="btnr" >Ingresar</button>
-                <a  href="regis.html" class="btn">Registrarse</a>
-            </div>
-        </form>
-    </div>    
+        </div>
+    </div>
 </body>
 
 </html>
