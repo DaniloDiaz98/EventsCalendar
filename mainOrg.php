@@ -111,35 +111,8 @@
 
                 $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
-<<<<<<< HEAD
-        if (!$conn) {
-            echo ("<p class='error'>No hay conexión a la BD " . mysqli_connect_error() . "</p>");
-        }
-
-        if (isset($_GET["usuario"])) {
-            $usuario = $_GET["usuario"];
-
-            $query = "SELECT * FROM usuarios WHERE usuario='$usuario'";
-            $ejecutar = mysqli_query($conn, $query);
-            $filas = mysqli_fetch_array($ejecutar);
-
-            if ($filas && $filas['id_cargo'] == 2) {
-                $rutaFotoPerfil = "img/" . $filas['foto_perfil'];
-                if (file_exists($rutaFotoPerfil)) {
-                    echo "<div class='profile'>";
-                    echo "<h1>Organizador</h1>";
-                    echo "<a href='cambiarFoto.php?usuario=" . urlencode($usuario) . "'>";
-                    echo "<img src='$rutaFotoPerfil' alt='Foto de Perfil del Organizador' width='100' height='100'>";
-                    echo "</a>";
-                    echo "<p><strong>Nombre:</strong> " . $filas['nombre'] . "</p>";
-                    // Puedes agregar más información sobre el organizador aquí
-                    echo "</div>";
-                } else {
-                    echo "<p class='error'>Foto de perfil no encontrada</p>";
-=======
                 if (!$conn) {
                     echo ("<p class='error'>No hay conexión a la BD " . mysqli_connect_error() . "</p>");
->>>>>>> Publicacion-de-Eventos
                 }
 
                 if (isset($_GET["usuario"])) {
