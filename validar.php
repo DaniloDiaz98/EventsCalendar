@@ -1,39 +1,5 @@
 <?php
 
-// $dbhost = "localhost";
-// $dbuser = "root";
-// $dbpass = "";
-// $dbname = "eventscalendar";
-
-
-// $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-// if (!$conn) {
-//     echo ("No hay conexión a la BD " . mysqli_connect_error());
-// }
-// $usuario = $_POST["usuario"];
-// $password = $_POST["pass"];
-
-// $query = "SELECT*FROM usuarios where usuario='$usuario' and password='$password'";
-// $ejecutar = mysqli_query($conn, $query);
-
-// $filas=mysqli_fetch_array($ejecutar);
-
-// if($filas['id_cargo']== 1){ //Administrador
-//     echo "<script> alert('Usuario Administrador');window.location= 'admin.php' </script>";
-// }else
-// if($filas['id_cargo']== 2){//Organizador
-//     echo "<script> alert('Usuario Organizador');window.location= 'mainOrg.php' </script>";
-// }
-// else{
-//     echo "<script> alert('Usuario No Encontrado');window.location= 'login.html' </script>";
-// }
-
-// mysqli_free_result($resultado);
-// mysqli_close($conexion);
-
-
-
 $dbhost = "localhost";
 $dbuser = "root";
 $dbpass = "";
@@ -59,8 +25,8 @@ if (!$ejecutar) {
 if (mysqli_num_rows($ejecutar) > 0) {
     $filas = mysqli_fetch_array($ejecutar);
 
-    if ($filas['id_cargo'] == 1) { // Administrador
-        echo "<script> alert('Usuario Administrador');window.location= 'admin.php' </script>";
+    if ($filas['id_cargo'] == 1) { // Administrador       
+        header("Location: mainAdm.php?usuario=" . urlencode($usuario));     
     } else if ($filas['id_cargo'] == 2) { // Organizador
         header("Location: mainOrg.php?usuario=" . urlencode($usuario));      
         exit;
