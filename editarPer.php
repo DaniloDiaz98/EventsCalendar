@@ -14,6 +14,7 @@
     <div class="container">
         <h1>Editar Perfil</h1>
         <?php
+        $nombreActual = "";
         if (isset($_GET["usuario"])) {
             $usuario = $_GET["usuario"];
 
@@ -41,7 +42,17 @@
                 } else {
                     echo "<p class='error'>Error al actualizar los datos en la base de datos.</p>";
                 }
+                $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
+                if (!$conn) {
+                    echo ("<p class='error'>No hay conexión a la BD " . mysqli_connect_error() . "</p>");
+                }
+                $query = "SELECT nombre, email, telefono FROM usuarios WHERE usuario='$usuario'";
+                $result = mysqli_query($conn, $query);
+                if ($result && mysqli_num_rows($result) > 0) {
+                    $userData = mysqli_fetch_assoc($result);
+                    $nombreActual = $userData["nombre"];
+                }
                 // Actualiza la foto de perfil si se proporciona
                 if (!empty($_FILES["nuevaFoto"]["tmp_name"])) {
                     $nombreFoto = $_FILES["nuevaFoto"]["name"];
@@ -61,23 +72,47 @@
                 }
 
                 mysqli_close($conn);
+            } else {
+                // Establecer conexión a la base de datos y realizar consulta para obtener datos del usuario
+                $dbhost = "localhost";
+                $dbuser = "root";
+                $dbpass = "";
+                $dbname = "eventscalendar";
+
+                $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+
+                if (!$conn) {
+                    echo ("<p class='error'>No hay conexión a la BD " . mysqli_connect_error() . "</p>");
+                }
+                $query = "SELECT nombre, email, telefono FROM usuarios WHERE usuario='$usuario'";
+                $result = mysqli_query($conn, $query);
+                if ($result && mysqli_num_rows($result) > 0) {
+                    $userData = mysqli_fetch_assoc($result);
+                    $nombreActual = $userData["nombre"];
+                }
+
+                mysqli_close($conn);
             }
         } else {
             echo "<p class='error'>Usuario no especificado</p>";
         }
         ?>
-        <form action="editarPer.php?usuario=<?php echo urlencode($usuario); ?>" method="post" enctype="multipart/form-data">
+        <form action="editarPer.php?usuario=<?php echo urlencode($usuario); ?>" method="post"
+            enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" class="form-control" required>
+                <input type="text" id="nombre" name="nombre" class="form-control"
+                    value="<?php echo htmlspecialchars($nombreActual); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
-                <input type="email" id="email" name="email" class="form-control" required>
+                <input type="email" id="email" name="email" class="form-control"
+                    value="<?php echo htmlspecialchars($userData["email"]); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="telefono" class="form-label">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" class="form-control" required>
+                <input type="tel" id="telefono" name="telefono" class="form-control"
+                    value="<?php echo htmlspecialchars($userData["telefono"]); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="nuevaFoto" class="form-label">Cambiar Foto de Perfil:</label>
