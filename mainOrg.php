@@ -100,6 +100,12 @@
                         <option value="educacion">Educacion</option>
                         <option value="deporte">Deporte</option>
                     </select>
+
+                    <label for="search">Búsqueda:</label>
+                    <input type="text" id="search" name="search" placeholder="Que deseas buscar...">
+                    <button onclick="buscarEventos()">Buscar</button>
+                    <button onclick="restablecerFiltros()">Restablecer Filtros</button>
+
                 </div>
             </div>
             <div class="col-md-9">
@@ -191,6 +197,12 @@
                             }
                         }
 
+                        if (isset($_GET['search']) && !empty($_GET['search'])) {
+                            $palabrasClave = $_GET['search'];
+                            $queryEventos .= " AND (titulo LIKE '%$searchKeywords%' OR descripcion LIKE '%$searchKeywords%' OR lugar LIKE '%$searchKeywords%')";
+
+                        }
+
                         $queryEventos .= " ORDER BY " . $orden;
                         $resultEventos = mysqli_query($conn, $queryEventos);
                         //echo "Consulta SQL: $queryEventos<br>";
@@ -252,6 +264,26 @@
 
                     window.location.href = finalUrl;
                 }
+                function buscarEventos() {
+                    var inputBusqueda = document.getElementById("search");
+                    var palabrasClave = inputBusqueda.value.trim();
+
+                    var url = window.location.href.split("?")[0];
+                    var usuario = "<?php echo urlencode($usuario); ?>";
+
+                    var finalUrl = url + "?usuario=" + usuario + "&search=" + encodeURIComponent(palabrasClave);
+
+                    window.location.href = finalUrl;
+                }
+                function restablecerFiltros() {
+                    var url = window.location.href.split("?")[0];
+                    var usuario = "<?php echo urlencode($usuario); ?>";
+
+                    var finalUrl = url + "?usuario=" + usuario;
+
+                    window.location.href = finalUrl;
+                }
+
             </script>
             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
