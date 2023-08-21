@@ -7,12 +7,38 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            margin: 20px;
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        .evento-title {
+            font-size: 24px;
+            margin-bottom: 10px;
         }
         .evento-thumbnail {
-            max-width: 100%;
+            width: 100%;
             max-height: 300px;
             object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .evento-info {
+            margin-bottom: 20px;
+        }
+        .evento-info strong {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .evento-descripcion {
+            font-size: 16px;
+            line-height: 1.6;
         }
     </style>
 </head>
