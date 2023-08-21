@@ -52,34 +52,15 @@
         form label {
             font-weight: bold;
         }
-
-        form input[type="text"],
-        form input[type="date"],
-        form textarea,
-        form input[type="file"] {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 10px;
-        }
-
-        form input[type="submit"],
-        .back-button {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .back-button {
-            background-color: #ccc;
-        }
+       
     </style>
 
 </head>
 
 <body>
+
     <div class="container">
+
         <h1 class="mt-5">Generar Evento</h1>
         <form action="procesarEvento.php" method="post" enctype="multipart/form-data" class="mt-4">
 
@@ -104,7 +85,7 @@
             <div class="mb-3">
                 <label for="ciudad" class="form-label">Ciudad:</label>
                 <select id="ciudad" name="ciudad" class="form-select" required>
-                    <option value="Latacunga">  </option>
+                    <option value="Latacunga">Latacunga </option>
                     <option value="Quito">Quito</option>
                     <option value="Ambato">Ambato</option>
                 </select>
@@ -112,7 +93,7 @@
             <div class="mb-3">
                 <label for="lugar" class="form-label">Lugar:</label>
                 <input type="text" id="lugar" name="lugar" class="form-control" required>
-            </div>    
+            </div>
             <div class="mb-3">
                 <label for="categoria" class="form-label">Categoría:</label>
                 <select id="categoria" name="categoria" class="form-select" required>
@@ -142,7 +123,7 @@
 
         </form>
     </div>
-    <!-- Agrega aquí tus scripts adicionales si los necesitas -->
+    <?php include 'footer.php'; ?>
 </body>
 
 </html>

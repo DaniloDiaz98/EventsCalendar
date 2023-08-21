@@ -8,6 +8,33 @@
     <title>Editar Perfil</title>
     <!-- Agrega el enlace a Bootstrap CDN aquí -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .back-btn a {
+            color: #007bff;
+        }
+    </style>
 </head>
 
 <body>
