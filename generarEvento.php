@@ -118,7 +118,7 @@
                 <input type="file" id="imagen2" name="imagen2" accept="image/*" class="form-control" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Guardar Evento</button>
+            <button type="submit" class="btn btn-primary">Enviar Evento</button>
             <a href="mainOrg.php?usuario=<?php echo urlencode($usuario); ?>">Volver al Dashboard</a>
 
         </form>

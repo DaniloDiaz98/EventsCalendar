@@ -76,23 +76,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 mysqli_close($conn);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- ... Etiquetas meta y título ... -->
-</head>
-<body>
-    <div class="container">
-        <h1>Generar Evento</h1>
-        <!-- ... Formulario ... -->
-        <p class="success-message"><?php echo $successMessage; ?></p>
-        <p class="error-message"><?php echo $errorMessage; ?></p>
-    </div>
-    <script>
-        // Redirigir después de mostrar el mensaje y vaciar el formulario
-        setTimeout(function() {
-            window.location.href = 'generarEvento.php'; // Cambia a la página actual
-        }, 1000); // Redirigir después de 3 segundos (ajusta según sea necesario)
-    </script>
-</body>
-</html>
