@@ -61,13 +61,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         VALUES ('$titulo', '$fecha', '$lugar', '$descripcion', '$urlImagen1', '$urlImagen2', '$status','$idOrganizador', '$ciudad', '$categoria')";
 
         if (mysqli_query($conn, $insertQuery)) {
-            header("Location: mainOrg.php?usuario=" . urlencode($usuario));
-            echo "Evento guardado correctamente.";
-
-            $_POST = array();
+            $response = array('status' => 'success');
         } else {
-            echo "Error al guardar el evento: " . mysqli_error($conn);
+            $response = array('status' => 'error', 'message' => 'Error al guardar el evento: ' . mysqli_error($conn));
         }
+        echo json_encode($response);
     } else {
         echo "Debes seleccionar dos imágenes.";
     }

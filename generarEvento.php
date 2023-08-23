@@ -8,6 +8,8 @@
     <title>Generar Evento</title>
     <!-- Agrega el enlace a Bootstrap CDN aquí -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Agrega el SDK de Firebase aquí -->
     <script type="module">
         // Importa las funciones que necesitas del SDK de Firebase
@@ -52,7 +54,6 @@
         form label {
             font-weight: bold;
         }
-       
     </style>
 
 </head>
@@ -118,12 +119,87 @@
                 <input type="file" id="imagen2" name="imagen2" accept="image/*" class="form-control" required>
             </div>
 
+            <div id="messageContainer" style="display: none;"></div>
+
             <button type="submit" class="btn btn-primary">Enviar Evento</button>
             <a href="mainOrg.php?usuario=<?php echo urlencode($usuario); ?>">Volver al Dashboard</a>
 
         </form>
     </div>
     <?php include 'footer.php'; ?>
+
 </body>
+<script>
+    function showLoadingMessage() {
+        document.getElementById('messageContainer').style.display = 'block';
+        document.getElementById('messageContainer').innerText = 'Guardando...';
+    }
+
+    function showSuccessMessage() {
+        document.getElementById('messageContainer').innerText = 'Guardado con éxito!!';
+    }
+
+    function showErrorMessage(message) {
+        document.getElementById('messageContainer').innerText = 'Error: ' + message;
+    }
+
+    document.querySelector('form').addEventListener('submit', function (e) {
+    e.preventDefault(); // Evita el envío normal del formulario
+
+    // Mostrar mensaje de "Guardando..."
+    Swal.fire({
+        text: 'Guardando...',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    // Enviar el formulario usando AJAX
+    var formData = new FormData(this);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'procesarEvento.php', true);
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            try {
+                var response = JSON.parse(xhr.responseText);
+                if (response.status === 'success') {
+                    // Mostrar mensaje de éxito usando SweetAlert
+                    Swal.fire({
+                    icon: 'success',
+                    text: 'Guardado con éxito!!'
+                }).then(() => {
+                    // Limpiar el formulario después del mensaje de éxito
+                    document.querySelector('form').reset();
+                });
+
+                } else {
+                    // Mostrar mensaje de error con SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Error: ' + response.message
+                    });
+                }
+            } catch (e) {
+                // Error al analizar JSON
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Error al procesar la respuesta del servidor.'
+                });
+            }
+        } else {
+            // Hubo un error en la comunicación con el servidor
+            Swal.fire({
+                icon: 'error',
+                text: 'Error de comunicación con el servidor.'
+            });
+        }
+    };
+
+    xhr.send(formData);
+});
+</script>
 
 </html>
