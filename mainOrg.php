@@ -94,24 +94,7 @@
             /* Agrega un espacio uniforme a los lados */
         }
 
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 15px 0;
-            background-color: #007bff;
-            /* Cambia al color de fondo deseado */
-            text-align: center;
-            /* Centrar el contenido horizontalmente */
-        }
-
-        .footer p {
-            margin: 0;
-            /* Eliminar el margen predeterminado del párrafo */
-            color: white;
-            /* Cambia al color de texto deseado */
-        }
+        
     </style>
 </head>
 
@@ -179,7 +162,7 @@
                             <div class="form-group">
                                 <label for="city">City:</label>
                                 <select id="city" class="form-control" onchange="applyFilters();">
-                                    <option value="">All Cities</option>
+                                    <option value="">Selecciona</option>
                                     <option value="Ambato">Ambato</option>
                                     <option value="Quito">Quito</option>
                                     <option value="Latacunga">Latacunga</option>
@@ -188,7 +171,7 @@
                             <div class="form-group">
                                 <label for="category">Category:</label>
                                 <select id="category" class="form-control" onchange="applyFilters();">
-                                    <option value="">All Categories</option>
+                                    <option value="">Selecciona</option>
                                     <option value="musica">Musica</option>
                                     <option value="danza">Danza</option>
                                     <option value="emprendimiento">Emprendimiento</option>

@@ -54,6 +54,24 @@
         form label {
             font-weight: bold;
         }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 0;
+            background-color: #007bff;
+            /* Cambia al color de fondo deseado */
+            text-align: center;
+            /* Centrar el contenido horizontalmente */
+        }
+
+        .footer p {
+            margin: 0;
+            /* Eliminar el margen predeterminado del párrafo */
+            color: white;
+            /* Cambia al color de texto deseado */
+        }
     </style>
 
 </head>
@@ -127,7 +145,6 @@
         </form>
     </div>
     <?php include 'footer.php'; ?>
-
 </body>
 <script>
     function showLoadingMessage() {
@@ -144,62 +161,62 @@
     }
 
     document.querySelector('form').addEventListener('submit', function (e) {
-    e.preventDefault(); // Evita el envío normal del formulario
+        e.preventDefault(); // Evita el envío normal del formulario
 
-    // Mostrar mensaje de "Guardando..."
-    Swal.fire({
-        text: 'Guardando...',
-        allowOutsideClick: false,
-        didOpen: () => {
-            Swal.showLoading();
-        }
-    });
+        // Mostrar mensaje de "Guardando..."
+        Swal.fire({
+            text: 'Guardando...',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
 
-    // Enviar el formulario usando AJAX
-    var formData = new FormData(this);
+        // Enviar el formulario usando AJAX
+        var formData = new FormData(this);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'procesarEvento.php', true);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'procesarEvento.php', true);
 
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            try {
-                var response = JSON.parse(xhr.responseText);
-                if (response.status === 'success') {
-                    // Mostrar mensaje de éxito usando SweetAlert
-                    Swal.fire({
-                    icon: 'success',
-                    text: 'Guardado con éxito!!'
-                }).then(() => {
-                    // Limpiar el formulario después del mensaje de éxito
-                    document.querySelector('form').reset();
-                });
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.status === 'success') {
+                        // Mostrar mensaje de éxito usando SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            text: 'Guardado con éxito!!'
+                        }).then(() => {
+                            // Limpiar el formulario después del mensaje de éxito
+                            document.querySelector('form').reset();
+                        });
 
-                } else {
-                    // Mostrar mensaje de error con SweetAlert
+                    } else {
+                        // Mostrar mensaje de error con SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Error: ' + response.message
+                        });
+                    }
+                } catch (e) {
+                    // Error al analizar JSON
                     Swal.fire({
                         icon: 'error',
-                        text: 'Error: ' + response.message
+                        text: 'Error al procesar la respuesta del servidor.'
                     });
                 }
-            } catch (e) {
-                // Error al analizar JSON
+            } else {
+                // Hubo un error en la comunicación con el servidor
                 Swal.fire({
                     icon: 'error',
-                    text: 'Error al procesar la respuesta del servidor.'
+                    text: 'Error de comunicación con el servidor.'
                 });
             }
-        } else {
-            // Hubo un error en la comunicación con el servidor
-            Swal.fire({
-                icon: 'error',
-                text: 'Error de comunicación con el servidor.'
-            });
-        }
-    };
+        };
 
-    xhr.send(formData);
-});
+        xhr.send(formData);
+    });
 </script>
 
 </html>
