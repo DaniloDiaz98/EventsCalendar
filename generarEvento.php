@@ -8,6 +8,8 @@
     <title>Generar Evento</title>
     <!-- Agrega el enlace a Bootstrap CDN aquí -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Agrega el SDK de Firebase aquí -->
     <script type="module">
         // Importa las funciones que necesitas del SDK de Firebase
@@ -41,6 +43,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #dfeffb;
         }
 
         .container {
@@ -52,34 +55,32 @@
         form label {
             font-weight: bold;
         }
-
-        form input[type="text"],
-        form input[type="date"],
-        form textarea,
-        form input[type="file"] {
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            margin-bottom: 10px;
-            padding: 10px;
-        }
-
-        form input[type="submit"],
-        .back-button {
+            padding: 15px 0;
             background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
+            /* Cambia al color de fondo deseado */
+            text-align: center;
+            /* Centrar el contenido horizontalmente */
         }
 
-        .back-button {
-            background-color: #ccc;
+        .footer p {
+            margin: 0;
+            /* Eliminar el margen predeterminado del párrafo */
+            color: white;
+            /* Cambia al color de texto deseado */
         }
     </style>
 
 </head>
 
 <body>
+
     <div class="container">
+
         <h1 class="mt-5">Generar Evento</h1>
         <form action="procesarEvento.php" method="post" enctype="multipart/form-data" class="mt-4">
 
@@ -104,7 +105,7 @@
             <div class="mb-3">
                 <label for="ciudad" class="form-label">Ciudad:</label>
                 <select id="ciudad" name="ciudad" class="form-select" required>
-                    <option value="Latacunga">  </option>
+                    <option value="Latacunga">Latacunga </option>
                     <option value="Quito">Quito</option>
                     <option value="Ambato">Ambato</option>
                 </select>
@@ -112,7 +113,7 @@
             <div class="mb-3">
                 <label for="lugar" class="form-label">Lugar:</label>
                 <input type="text" id="lugar" name="lugar" class="form-control" required>
-            </div>    
+            </div>
             <div class="mb-3">
                 <label for="categoria" class="form-label">Categoría:</label>
                 <select id="categoria" name="categoria" class="form-select" required>
@@ -137,12 +138,86 @@
                 <input type="file" id="imagen2" name="imagen2" accept="image/*" class="form-control" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Guardar Evento</button>
+            <div id="messageContainer" style="display: none;"></div>
+
+            <button type="submit" class="btn btn-primary">Enviar Evento</button>
             <a href="mainOrg.php?usuario=<?php echo urlencode($usuario); ?>">Volver al Dashboard</a>
 
         </form>
     </div>
-    <!-- Agrega aquí tus scripts adicionales si los necesitas -->
+    <?php include 'footer.php'; ?>
 </body>
+<script>
+    function showLoadingMessage() {
+        document.getElementById('messageContainer').style.display = 'block';
+        document.getElementById('messageContainer').innerText = 'Guardando...';
+    }
+
+    function showSuccessMessage() {
+        document.getElementById('messageContainer').innerText = 'Guardado con éxito!!';
+    }
+
+    function showErrorMessage(message) {
+        document.getElementById('messageContainer').innerText = 'Error: ' + message;
+    }
+
+    document.querySelector('form').addEventListener('submit', function (e) {
+        e.preventDefault(); // Evita el envío normal del formulario
+
+        // Mostrar mensaje de "Guardando..."
+        Swal.fire({
+            text: 'Guardando...',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        // Enviar el formulario usando AJAX
+        var formData = new FormData(this);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'procesarEvento.php', true);
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.status === 'success') {
+                        // Mostrar mensaje de éxito usando SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            text: 'Guardado con éxito!!'
+                        }).then(() => {
+                            // Limpiar el formulario después del mensaje de éxito
+                            document.querySelector('form').reset();
+                        });
+
+                    } else {
+                        // Mostrar mensaje de error con SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Error: ' + response.message
+                        });
+                    }
+                } catch (e) {
+                    // Error al analizar JSON
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Error al procesar la respuesta del servidor.'
+                    });
+                }
+            } else {
+                // Hubo un error en la comunicación con el servidor
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Error de comunicación con el servidor.'
+                });
+            }
+        };
+
+        xhr.send(formData);
+    });
+</script>
 
 </html>

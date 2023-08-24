@@ -5,32 +5,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
     <title>Registro</title>
 </head>
 
 <body>
-    <div class="registro">
-        <form action="config.php" method="POST" class="form" id="form">
-            <h1 class="title">Registro</h1>
-            <!-- Nombre -->
-            <div class="inputContainer">
-                <input type="text" class="input" placeholder="a" name="nombre" required pattern="[A-Za-z]{5,120}"
-                    title="Solo letras. Tamaño mínimo: 5. Tamaño máximo: 120">
-                <label class="label">Nombre</label>
-            </div>
-            <!-- Usuario -->
-            <div class="inputContainer">
-                <input type="text" class="input" placeholder="a" name="usuario" required pattern="[A-Za-z]{3,50}"
-                    title="Solo letras. Tamaño mínimo: 3. Tamaño máximo: 50">
-                <label class="label">Usuario</label>
-            </div>
-            <!-- Cedula -->
-            <div class="inputContainer">
-                <input type="text" class="input" placeholder="a" name="cedula" id="cedula" onblur="validar()" required
-                    pattern="[0-9]{10}">
-                <label class="label">Cedula</label>
-            </div>
+    <div id="contenedor">
+        <div id="contenedorcentrado">
+            <div id="form">
+                <form action="config.php" method="POST" class="form" >
+                    <h1 class="title">Registro</h1>
+                    <!-- Nombre -->
+                    <div class="inputContainer">
+                        <input type="text" class="input" placeholder="a" name="nombre" required
+                            pattern="[A-Za-z]{5,120}" title="Solo letras. Tamaño mínimo: 5. Tamaño máximo: 120">
+                        <label class="label">Nombre</label>
+                    </div>
+                    <!-- Usuario -->
+                    <div class="inputContainer">
+                        <input type="text" class="input" placeholder="a" name="usuario" required
+                            pattern="[A-Za-z]{3,50}" title="Solo letras. Tamaño mínimo: 3. Tamaño máximo: 50">
+                        <label class="label">Usuario</label>
+                    </div>
+                    <!-- Cedula -->
+                    <div class="inputContainer">
+                        <input type="text" class="input" placeholder="a" name="cedula" id="cedula" onblur="validar()"
+                            required pattern="[0-9]{10}">
+                        <label class="label">Cedula</label>
+                    </div>
 
             <div id="salida" name="salida"></div>
             <br>
@@ -54,10 +56,9 @@
             <!-- Botones -->
             <div>
                 <button type="submit" class="btn" name="registrarse" id="btnr" disabled>Registrar</button>
-                <a href="login.html"  class="btn btn-secondary">Regresar</a>
-               
+                <button type="reset" class="btn">Cancelar</button>
             </div>
-        </form>
+        </div>
     </div>
     <script type="text/javascript">
         function validar() {
