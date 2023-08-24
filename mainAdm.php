@@ -51,18 +51,37 @@
             mysqli_query($conn, $deleteQuery);
         }
 
+        function obtenerNombreCreador($conn, $idOrg) {
+            // Aquí realizas la consulta a la base de datos para obtener el nombre del creador
+            // Supongamos que tienes una tabla llamada 'usuarios' con columnas 'id' y 'nombre'
+            
+            $query = "SELECT nombre FROM usuarios WHERE id = $idOrg";
+            $result = mysqli_query($conn, $query);
+            
+            if ($result && mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                return $row['nombre'];
+            }
+            
+            return "Nombre de Creador Desconocido"; // O algún otro valor predeterminado
+        }
+
         $query = "SELECT * FROM eventos WHERE status = 1";
         $result = mysqli_query($conn, $query);
 
         while ($evento = mysqli_fetch_assoc($result)) {
             echo '<div class="evento-card">';
             echo '<h2>' . $evento['titulo'] . '</h2>';
+            echo '<p><strong>Categoría:</strong> ' . $evento['categoria'] . '</p>';
             echo '<p><strong>Fecha:</strong> ' . $evento['fecha'] . '</p>';
+            echo '<p><strong>Ciudad:</strong> ' . $evento['ciudad'] . '</p>';
             echo '<p><strong>Lugar:</strong> ' . $evento['lugar'] . '</p>';
             echo '<p><strong>Descripción:</strong> ' . $evento['descripcion'] . '</p>';
+            echo '<p><strong>Creado por:</strong> ' . obtenerNombreCreador($conn, $evento['id_org']) . '</p>';
             echo '<img src="' . $evento['imagen1'] . '" alt="Imagen 1" class="evento-thumbnail">';
             echo '<img src="' . $evento['imagen2'] . '" alt="Imagen 2" class="evento-thumbnail">';
             
+
             echo '<form method="post">';
             echo '<input type="hidden" name="aprobar" value="' . $evento['id_eve'] . '">';
             echo '<div class="mt-3">';
