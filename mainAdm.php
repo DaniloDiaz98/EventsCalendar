@@ -45,6 +45,12 @@
             mysqli_query($conn, $updateQuery);
         }
 
+        if (isset($_POST['eliminar'])) {
+            $idEventoEliminar = $_POST['eliminar'];
+            $deleteQuery = "DELETE FROM eventos WHERE id_eve = $idEventoEliminar";
+            mysqli_query($conn, $deleteQuery);
+        }
+
         $query = "SELECT * FROM eventos WHERE status = 1";
         $result = mysqli_query($conn, $query);
 
@@ -56,12 +62,21 @@
             echo '<p><strong>Descripción:</strong> ' . $evento['descripcion'] . '</p>';
             echo '<img src="' . $evento['imagen1'] . '" alt="Imagen 1" class="evento-thumbnail">';
             echo '<img src="' . $evento['imagen2'] . '" alt="Imagen 2" class="evento-thumbnail">';
+            
             echo '<form method="post">';
             echo '<input type="hidden" name="aprobar" value="' . $evento['id_eve'] . '">';
             echo '<div class="mt-3">';
-            echo '<button type="submit" class="btn btn-success mr-2">Aprobar</button>';           
+            echo '<button type="submit" class="btn btn-success mr-2">Aprobar</button>';
             echo '</div>';
             echo '</form>';
+            
+            echo '<form method="post">';
+            echo '<input type="hidden" name="eliminar" value="' . $evento['id_eve'] . '">';
+            echo '<div class="mt-3">';
+            echo '<button type="submit" class="btn btn-danger mr-2">Eliminar</button>';
+            echo '</div>';
+            echo '</form>';
+            
             echo '</div>';
         }
 
