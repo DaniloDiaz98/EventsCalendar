@@ -1,32 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administrador</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        .container {
+        <style>.container {
             margin-top: 20px;
         }
+
         .evento-card {
+            display: flex;
+            align-items: flex-start;
             margin-bottom: 20px;
             padding: 20px;
             border: 1px solid #ccc;
+            max-width: 800px;
+            /* Ajusta el ancho máximo de la tarjeta según sea necesario */
+            margin: 0 auto;
+            /* Centrar la tarjeta horizontalmente */
         }
+
+        .evento-info {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .evento-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: auto;
+        }
+
+        .evento-actions button {
+            margin: 5px;
+        }
+
+        .evento-images {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .evento-images img {
+            max-width: 200px;
+            /* Aumenta el tamaño máximo de las imágenes */
+            max-height: 200px;
+            /* Aumenta el tamaño máximo de las imágenes */
+            margin-right: 10px;
+        }
+
         .evento-thumbnail {
-            max-width: 100px;
-            max-height: 100px;
+            max-width: 250px;
+            /* Aumenta el tamaño máximo de las imágenes */
+            max-height: 250px;
+            /* Aumenta el tamaño máximo de las imágenes */
+            margin-right: 10px;
         }
     </style>
+
+    </style>
 </head>
+
 <body>
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>Panel de Administrador</h1>
             <a href="login.html" class="btn btn-danger">Salir</a>
         </div>
-        
+
         <?php
         $dbhost = "localhost";
         $dbuser = "root";
@@ -51,18 +96,19 @@
             mysqli_query($conn, $deleteQuery);
         }
 
-        function obtenerNombreCreador($conn, $idOrg) {
+        function obtenerNombreCreador($conn, $idOrg)
+        {
             // Aquí realizas la consulta a la base de datos para obtener el nombre del creador
             // Supongamos que tienes una tabla llamada 'usuarios' con columnas 'id' y 'nombre'
-            
+        
             $query = "SELECT nombre FROM usuarios WHERE id = $idOrg";
             $result = mysqli_query($conn, $query);
-            
+
             if ($result && mysqli_num_rows($result) > 0) {
                 $row = mysqli_fetch_assoc($result);
                 return $row['nombre'];
             }
-            
+
             return "Nombre de Creador Desconocido"; // O algún otro valor predeterminado
         }
 
@@ -71,6 +117,7 @@
 
         while ($evento = mysqli_fetch_assoc($result)) {
             echo '<div class="evento-card">';
+            echo '<div class="evento-info">';
             echo '<h2>' . $evento['titulo'] . '</h2>';
             echo '<p><strong>Categoría:</strong> ' . $evento['categoria'] . '</p>';
             echo '<p><strong>Fecha:</strong> ' . $evento['fecha'] . '</p>';
@@ -78,27 +125,29 @@
             echo '<p><strong>Lugar:</strong> ' . $evento['lugar'] . '</p>';
             echo '<p><strong>Descripción:</strong> ' . $evento['descripcion'] . '</p>';
             echo '<p><strong>Creado por:</strong> ' . obtenerNombreCreador($conn, $evento['id_org']) . '</p>';
+            echo '</div>';
+            echo '<div class="evento-images">';
             echo '<img src="' . $evento['imagen1'] . '" alt="Imagen 1" class="evento-thumbnail">';
             echo '<img src="' . $evento['imagen2'] . '" alt="Imagen 2" class="evento-thumbnail">';
-            
-
+            echo '</div>';
+            echo '<div class="evento-actions">';
             echo '<form method="post">';
             echo '<input type="hidden" name="aprobar" value="' . $evento['id_eve'] . '">';
             echo '<div class="mt-3">';
             echo '<button type="submit" class="btn btn-success mr-2">Aprobar</button>';
             echo '</div>';
             echo '</form>';
-            
+
             echo '<form method="post">';
             echo '<input type="hidden" name="eliminar" value="' . $evento['id_eve'] . '">';
             echo '<div class="mt-3">';
             echo '<button type="submit" class="btn btn-danger mr-2">Eliminar</button>';
             echo '</div>';
+            echo '</div>';
             echo '</form>';
-            
+
             echo '</div>';
         }
-
         mysqli_close($conn);
         ?>
     </div>
@@ -106,4 +155,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
