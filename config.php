@@ -21,8 +21,10 @@ $email = $_POST["email"];
 $telefono = $_POST["telefono"];
 $id_cargo = 2;
 $foto_perfil = "1.png";
-
-$query = "INSERT INTO usuarios (nombre,usuario,cedula,password,email,telefono,foto_perfil,id_cargo)   values('$nombre','$usuario','$cedula','$password','$email','$telefono','$foto_perfil','$id_cargo')";
+// Después de insertar los datos en la base de datos
+$token = uniqid();
+// Almacena el token en la base de datos junto con los datos del usuario
+$query = "INSERT INTO usuarios (nombre, usuario, cedula, password, email, telefono, foto_perfil, id_cargo, token) values ('$nombre', '$usuario', '$cedula', '$password', '$email', '$telefono', '$foto_perfil', '$id_cargo', '$token')";
 $ejecutar = mysqli_query($conn, $query);
 header("Location: mainOrg.php?usuario=" . urlencode($usuario));  
 
