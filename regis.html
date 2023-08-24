@@ -34,29 +34,43 @@
                         <label class="label">Cedula</label>
                     </div>
 
-            <div id="salida" name="salida"></div>
-            <br>
-            <!-- Password -->
-            <div class="inputContainer">
-                <input type="password" class="input" placeholder="a" name="pass" required pattern="[0-9]{4}"
-                    title="Entre 1-4 digitos ">
-                <label class="label">Password</label>
+                    <div id="salida" name="salida"></div>
+                    <br>
+                    <!-- Password -->
+                    <div class="inputContainer">
+                        <input type="password" class="input" placeholder="a" name="pass" required pattern="[0-9]{4}"
+                            title="Entre 1-4 digitos ">
+                        <label class="label">Password</label>
+                    </div>
+                    <!-- Email -->
+                    <div class="inputContainer">
+                        <input type="email" class="input" placeholder="a" name="email" required>
+                        <label class="label">Email</label>
+                    </div>
+                    <!-- Telefono -->
+                    <div class="inputContainer">
+                        <input type="text" class="input" placeholder="a" name="telefono" required pattern="[0-9]{10}"
+                            title="Numero de 10 digitos">
+                        <label class="label">Telefono</label>
+                    </div>
+                    <!-- Botones -->
+                    <div>
+                        <button type="submit" class="btn" name="registrarse" id="btnr" disabled>Registrar</button>
+                        <a href="login.html" type="reset" class="btn btn-secondary">Regresar</a>
+                    </div>
+                </form>
             </div>
-            <!-- Email -->
-            <div class="inputContainer">
-                <input type="email" class="input" placeholder="a" name="email" required>
-                <label class="label">Email</label>
-            </div>
-            <!-- Telefono -->
-            <div class="inputContainer">
-                <input type="text" class="input" placeholder="a" name="telefono" required pattern="[0-9]{10}"
-                    title="Numero de 10 digitos">
-                <label class="label">Telefono</label>
-            </div>
-            <!-- Botones -->
-            <div>
-                <button type="submit" class="btn" name="registrarse" id="btnr" disabled>Registrar</button>
-                <button type="reset" class="btn">Cancelar</button>
+             <div id="derecho">
+                <div class="logo-container">
+                    <img class="logo" src="img/logo.png" alt="Logo de la página">
+                </div>
+                <hr>
+                <div class="titulo">
+                    <p class="welcome-text">¡Bienvenido! Permíteme presentarte "Events Calendar": una innovadora
+                        aplicación web diseñada para facilitar la búsqueda y publicación de eventos. Con nuestra
+                        plataforma, los usuarios podrán descubrir y explorar una amplia variedad de eventos en su área,
+                        desde conciertos y conferencias hasta ferias y exposiciones.</p>
+                </div>
             </div>
         </div>
     </div>
