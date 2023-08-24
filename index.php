@@ -111,7 +111,7 @@
 
 <body>
     <nav style="height: 92px" class="navbar navbar-expand-lg navbar-light bg-primary">
-        <a class="navbar-brand" href="#" style="color: white">Events Calendar</a>
+        <a class="navbar-brand"  style="color: white">Events Calendar</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
