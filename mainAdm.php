@@ -7,6 +7,9 @@
     <title>Panel de Administrador</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        body{
+            background-color: #dfeffb;
+        }
         <style>.container {
             margin-top: 20px;
         }

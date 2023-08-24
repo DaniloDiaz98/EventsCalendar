@@ -6,10 +6,10 @@
     <title>Detalles del Evento</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
-            background-color: #f8f9fa;
+        body{
+            background-color: #dfeffb;
             font-family: Arial, sans-serif;
-        }
+        }      
         .container {
             padding: 20px;
             background-color: #ffffff;

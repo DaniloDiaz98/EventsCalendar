@@ -8,6 +8,9 @@
     <title>Dashboard 1</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        body{
+            background-color: #dfeffb;
+        }
         .dropdown-menu {
             display: none;
             position: absolute;
@@ -154,8 +157,8 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="<?php echo $rutaFotoPerfil; ?>" alt="Foto de Perfil del Organizador" width="80"
-                                        height="80" class="rounded-circle profile-img"> <!-- Agregado class="profile-img" -->
+                                    <img src="<?php echo $rutaFotoPerfil; ?>" alt="Foto de Perfil del Organizador" width="60"
+                                        height="60" class="rounded-circle profile-img"> <!-- Agregado class="profile-img" -->
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item"

@@ -7,6 +7,9 @@
     <title>Eventos Aprobados</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        body{
+            background-color: #dfeffb;
+        }
         .evento-card {
             border: 1px solid #ccc;
             padding: 10px;
@@ -69,19 +72,63 @@
             color: white;
             /* Cambia al color de texto deseado */
         }
+
         .iniciar-sesion {
             text-align: right;
         }
 
-      
+        /* Estilo para la barra de búsqueda */
+        #search {
+            border: 1px solid #ccc;
+            padding: 8px;
+            border-radius: 5px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* Cambiar estilo al enfocar la barra de búsqueda */
+        #search:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Estilo para el botón de iniciar sesión */
+        .iniciar-sesion a.btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        /* Cambiar estilo al pasar el cursor sobre el botón de iniciar sesión */
+        .iniciar-sesion a.btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 
 <body>
+    <nav style="height: 92px" class="navbar navbar-expand-lg navbar-light bg-primary">
+        <a class="navbar-brand" href="#" style="color: white">Events Calendar</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <input style="height: 40px ; width: 200px;" type="text" id="search" class="form-control mr-sm-2"
+                        placeholder="Search">
+                </li>
+                <li class="nav-item">
+                    <button style="height: 40px ; width: 60px;class=" btn btn-light my-2 my-sm-0"
+                        onclick="buscarEventos()">Search</button>
+                </li>
+                <li class="nav-item">
+                    <a href="login.html" class="btn btn-light ml-2">Iniciar Sesión</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <div class="iniciar-sesion">
-        <a href="login.html" class="btn btn-primary">Iniciar Sesión</a>
-    </div>
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -114,15 +161,7 @@
                             <option value="fecha" <?php echo (isset($_GET['orden']) && $_GET['orden'] === 'fecha' ? 'selected' : ''); ?>>Fecha</option>
                         </select>
                     </div>
-
-                    <div class="form-group">
-                        <label for="search">Búsqueda:</label>
-                        <input type="text" id="search" class="form-control" name="search"
-                            placeholder="Qué deseas buscar...">
-                    </div>
-
                     <div>
-                        <button class="btn btn-primary mr-2" onclick="buscarEventos()">Buscar</button>
                         <button class="btn btn-secondary" onclick="restablecerFiltros()">Restablecer
                             Filtros</button>
                     </div>
@@ -201,22 +240,22 @@
         $result = mysqli_query($conn, $query);
 
         while ($evento = mysqli_fetch_assoc($result)) {
-             ?>
-                <div class="evento-card rounded shadow">
-                    <h2>
-                        <?php echo $evento['titulo']; ?>
-                    </h2>
-                    <div class="evento-thumbnail-container">
-                        <img src="<?php echo $evento['imagen1']; ?>" alt="Imagen 1" class="evento-thumbnail">
-                    </div>
-                    <p><strong>Fecha:</strong>
-                        <?php echo $evento['fecha']; ?>
-                    </p>
-                    <p><strong>Lugar:</strong>
-                        <?php echo $evento['lugar']; ?>
-                    </p>
-                    <a href="javascript:void(0);" onclick="verDetalles(<?php echo $evento['id_eve']; ?>);">Ver más</a>
+            ?>
+            <div class="evento-card rounded shadow">
+                <h2>
+                    <?php echo $evento['titulo']; ?>
+                </h2>
+                <div class="evento-thumbnail-container">
+                    <img src="<?php echo $evento['imagen1']; ?>" alt="Imagen 1" class="evento-thumbnail">
                 </div>
+                <p><strong>Fecha:</strong>
+                    <?php echo $evento['fecha']; ?>
+                </p>
+                <p><strong>Lugar:</strong>
+                    <?php echo $evento['lugar']; ?>
+                </p>
+                <a href="javascript:void(0);" onclick="verDetalles(<?php echo $evento['id_eve']; ?>);">Ver más</a>
+            </div>
             <?php
         }
 
