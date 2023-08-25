@@ -55,6 +55,7 @@
         form label {
             font-weight: bold;
         }
+
         .footer {
             position: fixed;
             bottom: 0;
@@ -78,10 +79,13 @@
 </head>
 
 <body>
+    <nav style="height: 92px" class="navbar navbar-expand-lg navbar-light bg-primary">
+        <a class="navbar-brand" style="color: white">Generar Evento</a>       
+    </nav>
 
     <div class="container">
 
-        <h1 class="mt-5">Generar Evento</h1>
+        
         <form action="procesarEvento.php" method="post" enctype="multipart/form-data" class="mt-4">
 
             <?php
@@ -166,7 +170,7 @@
 
         // Mostrar mensaje de "Guardando..."
         Swal.fire({
-            text: 'Guardando...',
+            text: 'Enviando...',
             allowOutsideClick: false,
             didOpen: () => {
                 Swal.showLoading();
@@ -187,7 +191,7 @@
                         // Mostrar mensaje de éxito usando SweetAlert
                         Swal.fire({
                             icon: 'success',
-                            text: 'Guardado con éxito!!'
+                            text: 'Enviado con éxito!!'
                         }).then(() => {
                             // Limpiar el formulario después del mensaje de éxito
                             document.querySelector('form').reset();

@@ -54,17 +54,7 @@
             /* Agrega un espacio uniforme a los lados */
         }
 
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 15px 0;
-            background-color: #007bff;
-            /* Cambia al color de fondo deseado */
-            text-align: center;
-            /* Centrar el contenido horizontalmente */
-        }
+       
 
         .footer p {
             margin: 0;

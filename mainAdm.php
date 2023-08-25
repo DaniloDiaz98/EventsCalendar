@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administrador</title>
+    <title>Administrador</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -91,7 +91,7 @@
 <body>
     <nav style="height: 92px" class="navbar navbar-expand-lg navbar-light bg-primary">
 
-        <a class="navbar-brand" style="color: white">Panel de Administrador</a>
+        <a class="navbar-brand" style="color: white">Events Calendar - Administrador</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -104,7 +104,8 @@
         </div>
 
     </nav>
-
+    
+    <h1 align="center">Eventos a Revizar</h1>
 
     <div class="container">
         <div class="table-responsive">

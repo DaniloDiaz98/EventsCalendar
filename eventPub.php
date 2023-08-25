@@ -53,7 +53,7 @@
 <body>
     <nav style="height: 92px" class="navbar navbar-expand-lg navbar-light bg-primary">
 
-        <a class="navbar-brand text-white" href="#">Eventos Publicados</a>
+        <a class="navbar-brand text-white" href="#">Events Calendar - Administrador</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -66,7 +66,7 @@
         </div>
 
     </nav>
-
+    <h1 align="center">Eventos Publicados</h1>
     <div class="container">
         <div class="table-responsive">
             <table class="table table-bordered">
