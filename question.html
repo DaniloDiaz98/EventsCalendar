@@ -7,6 +7,21 @@
     <title>Document</title>
   </head>
   <body>
+    <nav class="nav">
+      <div class="nav__logo">
+        <h3>EventsCalendar</h3>
+      </div>
+      <ul class="nav__list">
+        <li class="nav__item">
+          <a href="./questions.html" class="nav__link">Preguntas</a>
+        </li>
+        <li class="nav__item">
+          <a href="./login.html" class="nav__link">
+            <img src="./assets/user.png" alt="" />
+          </a>
+        </li>
+      </ul>
+    </nav>
     <section class="questions">
       <article class="question">
         <div class="user__imagen">
@@ -48,12 +63,6 @@
       </article>
     </section>
 
-    <script>
-      const answer = document.getElementById("answer_user1");
-      const btnReply = document.getElementById("question__reply");
-      btnReply.addEventListener("click", () => {
-        answer.classList.toggle("answer-disable");
-      });
-    </script>
+    <script src="./js/script.js"></script>
   </body>
 </html>
