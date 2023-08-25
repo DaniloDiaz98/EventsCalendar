@@ -1,3 +1,12 @@
+<?php
+if (isset($_GET["logout"]) && $_GET["logout"] === "true") {
+    // Realiza las acciones de cierre de sesión aquí
+    // Por ejemplo, elimina los datos de sesión o cookies
+    // Redirige al usuario a la página de inicio de sesión después del cierre de sesión
+    header("Location: login.html");
+    exit(); // Asegúrate de salir después de redirigir
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,9 +18,10 @@
     <link rel="icon" href="img/logo.ico">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body{
+        body {
             background-color: #dfeffb;
         }
+
         .dropdown-menu {
             display: none;
             position: absolute;
@@ -140,7 +150,7 @@
         $filas = mysqli_fetch_array($ejecutar);
 
         if ($filas && $filas['id_cargo'] == 2) {
-            $rutaFotoPerfil =  $filas['foto_perfil'];
+            $rutaFotoPerfil = $filas['foto_perfil'];
             $organizadorId = $filas['id'];
             $organizadorIdEncoded = urlencode($organizadorId);
 
@@ -167,7 +177,8 @@
                                     <a class="dropdown-item"
                                         href="generarEvento.php?usuario=<?php echo urlencode($usuario); ?>&organizadorId=<?php echo $organizadorIdEncoded; ?>">Generar
                                         Evento</a>
-                                    <a class="dropdown-item" href="login.html">Salir</a>
+                                    <a class="dropdown-item" href="login.html?logout=true">Salir</a>
+
                                 </div>
                             </li>
                         </ul>
@@ -277,7 +288,9 @@
                     <p><strong>Lugar:</strong>
                         <?php echo $evento['lugar']; ?>
                     </p>
-                    <a href="javascript:void(0);" onclick="verDetalles(<?php echo $evento['id_eve']; ?>);">Ver más</a>
+                    <a href="javascript:void(0);"
+                        onclick="verDetalles(<?php echo $evento['id_eve']; ?>, '<?php echo $_GET['usuario']; ?>');">Ver más</a>
+
                 </div>
 
 
@@ -306,10 +319,11 @@
             window.location.href = url + "?usuario=" + usuario + "&orden=" + ordenSeleccionado;
         }
 
-        function verDetalles(eventoId) {
-            // Abre una nueva ventana o pestaña con el archivo verEvento.php y el ID del evento
-            window.open('verEvento.php?id=' + eventoId, '_blank');
+        function verDetalles(eventoId, usuario, organizadorId) {
+            // Abre una nueva ventana o pestaña con el archivo verEvento.php y los parámetros necesarios
+            window.open('verEvent.php?id=' + eventoId + '&usuario=' + usuario, '_blank');
         }
+
         function applyFilters() {
             var citySelect = document.getElementById("city");
             var selectedCity = citySelect.options[citySelect.selectedIndex].value;

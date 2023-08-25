@@ -12,13 +12,16 @@
             background-color: #dfeffb;
             font-family: Arial, sans-serif;
         }
+
         .container {
             margin-top: 50px;
         }
+
         .evento-details {
             display: flex;
             justify-content: space-between;
         }
+
         .evento-info {
             flex: 1;
             padding: 20px;
@@ -27,28 +30,34 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             margin-right: 20px;
         }
+
         .evento-imagenes {
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
         .evento-title {
             font-size: 24px;
             margin-bottom: 10px;
         }
+
         .evento-categoria {
             font-size: 18px;
             margin-bottom: 5px;
         }
+
         .evento-info strong {
             font-size: 18px;
             margin-bottom: 5px;
         }
+
         .evento-descripcion {
             font-size: 16px;
             line-height: 1.6;
         }
+
         .evento-thumbnail {
             width: 100%;
             max-height: 300px;
@@ -61,7 +70,7 @@
 
 <body>
     <nav style="height: 92px" class="navbar navbar-expand-lg navbar-light bg-primary">
-        <a class="navbar-brand" href="index.php" style="color: white">Events Calendar</a>
+        <a class="navbar-brand" style="color: white">Events Calendar</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -111,13 +120,39 @@
                 echo '</div>';
 
                 echo '</div>';
-            } else {
-                echo '<p>Evento no encontrado.</p>';
-            }
-        } else {
-            echo '<p>ID de evento no especificado.</p>';
-        }
+                // Obtener y mostrar los comentarios del evento
+                if ($evento) {
+                    $queryComentarios = "SELECT c.*, u.nombre, u.foto_perfil FROM comentario c
+                             INNER JOIN usuarios u ON c.id_or = u.id
+                             WHERE c.id_eve = $eventoId";
+                    $resultComentarios = mysqli_query($conn, $queryComentarios);
 
+                    if ($resultComentarios && mysqli_num_rows($resultComentarios) > 0) {
+                        echo '<div class="container mt-5">';
+                        echo '<h2 class="mb-4">Comentarios</h2>';
+
+                        while ($comentario = mysqli_fetch_assoc($resultComentarios)) {
+                            echo '<div class="card mb-3 shadow-sm" style="border-radius: 20px;">'; // Ajusta el valor de border-radius según tu preferencia
+                            echo '<div class="card-body d-flex align-items-start">';
+                            echo '<img src="' . $comentario['foto_perfil'] . '" alt="Foto de Perfil" width="60" height="60" class="rounded-circle mr-3">';
+                            echo '<div>';
+                            echo '<h5 class="card-title font-weight-bold mb-1">' . $comentario['nombre'] . '</h5>';
+                            echo '<p class="card-text">' . $comentario['comentario'] . '</p>';
+                            echo '<p class="card-text text-muted">' . $comentario['fecha'] . '</p>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
+
+                        echo '</div>';                        
+                    }
+                } else {
+                    echo '<p>Evento no encontrado.</p>';
+                }
+            } else {
+                echo '<p>ID de evento no especificado.</p>';
+            }
+        }
         mysqli_close($conn);
         ?>
         <?php include 'footer.php'; ?>

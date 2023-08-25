@@ -248,6 +248,7 @@
                 <a href="javascript:void(0);" onclick="verDetalles(<?php echo $evento['id_eve']; ?>);">Ver más</a>
             </div>
             <?php
+            
         }
 
         mysqli_close($conn);
