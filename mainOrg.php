@@ -140,7 +140,7 @@
         $filas = mysqli_fetch_array($ejecutar);
 
         if ($filas && $filas['id_cargo'] == 2) {
-            $rutaFotoPerfil = "img/" . $filas['foto_perfil'];
+            $rutaFotoPerfil =  $filas['foto_perfil'];
             $organizadorId = $filas['id'];
             $organizadorIdEncoded = urlencode($organizadorId);
 

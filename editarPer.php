@@ -42,10 +42,15 @@
     <div class="container">
         <h1>Editar Perfil</h1>
         <?php
+        require 'vendor/autoload.php';
         $nombreActual = "";
         if (isset($_GET["usuario"])) {
             $usuario = $_GET["usuario"];
-
+            // Configura tus credenciales y detalles de Firebase Storage aquí
+            $storage = new \Google\Cloud\Storage\StorageClient([
+                'projectId' => 'eventcalendar-7e0dc',
+                'keyFilePath' => 'eventcalendar-7e0dc-firebase-adminsdk-zbn98-45a95464ad.json'
+            ]);
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $dbhost = "localhost";
                 $dbuser = "root";
@@ -85,17 +90,26 @@
                 if (!empty($_FILES["nuevaFoto"]["tmp_name"])) {
                     $nombreFoto = $_FILES["nuevaFoto"]["name"];
                     $rutaTemporal = $_FILES["nuevaFoto"]["tmp_name"];
-                    $rutaDestino = "img/" . $nombreFoto;
+                
+                    
+                
+                    $bucketName = 'eventcalendar-7e0dc.appspot.com'; // Reemplaza con el nombre de tu bucket de Firebase Storage
 
-                    if (move_uploaded_file($rutaTemporal, $rutaDestino)) {
-                        $updateFotoQuery = "UPDATE usuarios SET foto_perfil='$nombreFoto' WHERE usuario='$usuario'";
-                        if (mysqli_query($conn, $updateFotoQuery)) {
-                            echo "<p class='success'>La foto de perfil se ha actualizado correctamente.</p>";
-                        } else {
-                            echo "<p class='error'>Error al actualizar la foto de perfil en la base de datos.</p>";
-                        }
+                   
+                    $object = $storage->bucket($bucketName)->upload(
+                        file_get_contents($rutaTemporal),
+                        [
+                            'name' => 'Fotos de Perfil/' . $nombreFoto // Agrega la carpeta en el nombre del archivo
+                        ]
+                    );
+                    
+                    $urlImagenPerfil = $object->signedUrl(new \DateTime('tomorrow'));
+                
+                    $updateFotoQuery = "UPDATE usuarios SET foto_perfil='$urlImagenPerfil' WHERE usuario='$usuario'";
+                    if (mysqli_query($conn, $updateFotoQuery)) {
+                        echo "<p class='success'>La foto de perfil se ha actualizado correctamente.</p>";
                     } else {
-                        echo "<p class='error'>Error al subir la imagen.</p>";
+                        echo "<p class='error'>Error al actualizar la foto de perfil en la base de datos.</p>";
                     }
                 }
 
