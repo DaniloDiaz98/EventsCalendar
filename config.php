@@ -57,7 +57,8 @@ echo"Email enviado correctamente";
 
 $query = "INSERT INTO usuarios (nombre,usuario,cedula,password,email,telefono,foto_perfil,id_cargo,token)   values('$nombre','$usuario','$cedula','$password','$email','$telefono','$foto_perfil','$id_cargo','$token')";
 $ejecutar = mysqli_query($conn, $query);
-header("Location: mainOrg.php?usuario=" . urlencode($usuario));
+//header("Location: mainOrg.php?usuario=" . urlencode($usuario));
+header("Location: validarTok.php?usuario=" . urlencode($usuario));
 
 
 
