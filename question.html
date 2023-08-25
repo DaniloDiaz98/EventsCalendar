@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <section class="questions">
+      <article class="question">
+        <div class="user__imagen">
+          <img src="./assets//user.png" alt="" />
+        </div>
+        <section class="question-body">
+          <span class="question-user__name">User 1</span>
+          <p class="question-user__info">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad,
+            obcaecati iure. Recusandae ab saepe magnam porro officia laborum
+            aspernatur quod amet ipsam? Quasi, excepturi animi. Totam architecto
+            nam aliquid quia! Lorem ipsum dolor sit amet consectetur adipisicing
+            elit. Recusandae fuga a magni aliquam molestias asperiores
+            repudiandae eaque, vel enim temporibus et, aperiam illum amet at
+            beatae ab suscipit expedita voluptatem.
+          </p>
+          <button class="question__reply" id="question__reply">
+            Responder
+          </button>
+          <div class="answer answer-disable" id="answer_user1">
+            <section class="answer-info">
+              <div class="user__imagen">
+                <img src="./assets/user.png" alt="" />
+              </div>
+              <div class="answer__text">
+                <textarea
+                  name="answer_user"
+                  id="answer_user"
+                  cols="30"
+                  rows="4"
+                ></textarea>
+              </div>
+            </section>
+            <div class="answer-footer">
+              <button class="answer__send">Enviar</button>
+            </div>
+          </div>
+        </section>
+      </article>
+    </section>
+
+    <script>
+      const answer = document.getElementById("answer_user1");
+      const btnReply = document.getElementById("question__reply");
+      btnReply.addEventListener("click", () => {
+        answer.classList.toggle("answer-disable");
+      });
+    </script>
+  </body>
+</html>
